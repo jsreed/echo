@@ -1,0 +1,21 @@
+apiVersion: skaffold/v1
+kind: Config
+metadata:
+  name:  "echo"
+build:
+  artifacts:
+    - image: echo/gateway
+      context: .
+      docker:
+        dockerfile: ./deployment/gateway/Dockerfile.dev
+    - image: echo/echo
+      context: .
+      docker:
+        dockerfile: ./deployment/echo/Dockerfile.dev
+deploy:
+  kubectl:
+    manifests:
+      - ./deployment/gateway/k8s/*.yml
+      - ./deployment/echo/k8s/*.yml
+    flags:
+       global: ["--namespace=echo"]

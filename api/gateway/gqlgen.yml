@@ -1,0 +1,18 @@
+schema:
+  - "api/gateway/**/*.graphql"
+
+# Let gqlgen know where to put the generated server
+exec:
+  filename: internal/gateway/generated/graphql.go
+  package: generated
+
+autobind:
+  - github.com/jsreed/echo/model
+
+# Let gqlgen know where to put the generated models (if any)
+model:
+  filename: model/generated.go
+  package: model
+
+# Optional, turns on binding to field names by tag provided
+struct_tag: json
